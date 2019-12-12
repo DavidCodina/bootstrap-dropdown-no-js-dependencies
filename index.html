@@ -82,6 +82,10 @@
         for both elements on <code>click</code> of <code>&#60;button class="dropdown-toggle"&#62;</code>.</p>
 
 
+        <p>In fact, there doesn't seem to be any immediately apparent reason to apply it to
+        <code>&#60;div class="dropdown"&#62;</code>. Nonetheless, that's what Bootstrap does.</p>
+
+
         <div class="d-flex justify-content-around">
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle">Left-Aligned Dropdown Menu</button>
@@ -113,17 +117,18 @@
         ===================================================================== */
 
 
-        function hideAllDropdowns(){
+        function hideOtherDropdowns(newDropdownToggle){
           const dropdownToggles = document.getElementsByClassName("dropdown-toggle");
-
 
           for (let i = 0; i < dropdownToggles.length; i++){
             const dropdownToggle = dropdownToggles[i];
             const dropdown       = dropdownToggle.closest('.dropdown');
             const dropdownMenu   = dropdown.getElementsByClassName("dropdown-menu")[0];
 
-            dropdown.classList.remove('show');
-            dropdownMenu.classList.remove('show');
+            if (dropdownToggle !== newDropdownToggle){
+              dropdown.classList.remove('show');
+              dropdownMenu.classList.remove('show');
+            }
           }
         }
 
@@ -139,12 +144,12 @@
         for (let i = 0; i < dropdownToggles.length; i++){
           const dropdownToggle = dropdownToggles[i];
 
-          dropdownToggle.addEventListener('click', function(){
+          dropdownToggle.addEventListener('click', function(e){
             const dropdown     = this.closest('.dropdown');
             const dropdownMenu = dropdown.getElementsByClassName("dropdown-menu")[0];
 
             //Optional
-            hideAllDropdowns();
+            hideOtherDropdowns(e.target);
 
             dropdown.classList.toggle('show');
             dropdownMenu.classList.toggle('show');
