@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title> - </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:900&display=swap');
+
+    body {
+      background-color: floralWhite;
+      font-family: 'Open Sans';
+    }
+
+    main { padding: 0 50px 200px 50px; }
+
+    .article {
+      width: 100%;
+      margin: 0px auto;
+      padding: 25px;
+      color: #333;
+      background-color: snow;
+      border: 2px solid #61DAFB;
+      border-radius: 1.5rem  !important;
+      opacity: 1;
+    }
+
+     p {
+       margin-bottom: 25px;
+      line-height: 1.75;
+    }
+
+    .fancy-h1 {
+      margin: 0;
+      padding: 0px 25px;
+      color: snow;
+      text-align: center;
+      font-size: 50px;
+      font-family: Montserrat;
+      letter-spacing: 3px;
+      line-height: 1.25;
+      -webkit-text-stroke-width: 1.5px;
+      -webkit-text-stroke-color: #61DAFB;
+      text-shadow: -3px 3px 6px rgba(0,0,0,0.15);
+    }
+
+    .fancy-h2 {
+      color: snow;
+      font-size: 40px;
+      font-family: Montserrat;
+      letter-spacing: 1px;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: violet;
+      text-shadow: -2px 2px 4px rgba(0,0,0,0.15);
+    }
+    </style>
+
+    <!--
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    -->
+  </head>
+
+
+  <body>
+    <header>
+      <h1 class="text-center fancy-h1 py-5">Dropdowns:<br> no jQuery or bootstrap.js</h1>
+    </header>
+
+    <main>
+
+
+
+      <article class="article pb-5">
+        <h2 class="fancy-h2">Overview:</h2>
+
+        <p>In Bootstrap when a dropdown button is clicked it toggles <code>.show</code>
+        both on <code>&#60;div class="dropdown"&#62;</code> and on <code>&#60;div class="dropdown-menu"&#62;</code>.
+        Thus in order to implement the dropdown functionality, we simply toggle <code>.show</code>
+        for both elements on <code>click</code> of <code>&#60;button class="dropdown-toggle"&#62;</code>.</p>
+
+
+        <div class="d-flex justify-content-around">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle">Left-Aligned Dropdown Menu</button>
+
+            <div class="dropdown-menu mt-2">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle">Right-Aligned Dropdown Menu</button>
+
+            <div class="dropdown-menu dropdown-menu-right mt-2">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+        </div><!-- <div class="d-flex justify-content-around"> -->
+      </article>
+
+
+      <script>
+      (function(){
+        /* =====================================================================
+                                      Functions
+        ===================================================================== */
+
+
+        function hideAllDropdowns(){
+          const dropdownToggles = document.getElementsByClassName("dropdown-toggle");
+
+
+          for (let i = 0; i < dropdownToggles.length; i++){
+            const dropdownToggle = dropdownToggles[i];
+            const dropdown       = dropdownToggle.closest('.dropdown');
+            const dropdownMenu   = dropdown.getElementsByClassName("dropdown-menu")[0];
+
+            dropdown.classList.remove('show');
+            dropdownMenu.classList.remove('show');
+          }
+        }
+
+
+        /* =====================================================================
+                                      Event Listeners
+        ===================================================================== */
+
+
+        const dropdownToggles = document.getElementsByClassName("dropdown-toggle");
+
+
+        for (let i = 0; i < dropdownToggles.length; i++){
+          const dropdownToggle = dropdownToggles[i];
+
+          dropdownToggle.addEventListener('click', function(){
+            const dropdown     = this.closest('.dropdown');
+            const dropdownMenu = dropdown.getElementsByClassName("dropdown-menu")[0];
+
+            //Optional
+            hideAllDropdowns();
+
+            dropdown.classList.toggle('show');
+            dropdownMenu.classList.toggle('show');
+          });
+        }
+      })();
+      </script>
+    </main>
+  </body>
+</html>
